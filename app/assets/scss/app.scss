@@ -2,16 +2,18 @@
 @import "foundation";
 
 
-.custom-block-grid {
-// Now 10%
-@include breakpoint(large) {
-@include grid-layout(10);
-}
+.squares-block-grid {
+  // Now 10%
+  @include breakpoint(large) {
+    @include grid-layout(10);
+  }
 }
 
+
+
 .custom-container {
-@include grid-container(
-$width: 800px, // Can be any unit with a value
-$align: center // Can be left, right, or center
-);
+  @include grid-container(
+  $width: 80%, // Can be any unit with a value
+  $align: center // Can be left, right, or center
+  );
 }

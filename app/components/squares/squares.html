@@ -14,7 +14,6 @@ controller: squaresCtrl
   width: 5em;
   max-width: 5em;
   padding: 0.1em;
-  font-size: 0.3em;
   color: white;
   margin: auto;
   display: inline-block;
@@ -30,53 +29,66 @@ controller: squaresCtrl
   border-style: solid;*/
 }
 .sqcontent {
-  width: 50em;
-  height: 50em;
+  font-size: 0.3em;
+  width: 51em;
+  height: 51em;
   word-wrap: break-word;
-  float: left;
+  /*padding: 2em;*/
+  margin: 3em;
+  /*float: none;*/
+  /*float: left;*/
   /*overflow-x: scroll;*/
 }
 
 .sq-selected {
-  background-color: red;
+  background-color: green;
+}
+
+.sq-purchased {
+
 }
 
 .name-form {
-  float: right;
+ /*width: 20em;*/
 }
 </style>
 
-<div ng-controller="squaresCtrl">
+<div class="grid-frame vertical" ng-controller="squaresCtrl">
+  <!-- <div class="grid-block " > -->
 
-  <div class="name-form">
-    <label>
-      Input Label
-      <input type="text" placeholder="Enter Name" ng-model="name">
-    </label>
-  </div>
-  Welcome {{name}}
-  You want to buy {{selected}} squares
+    <div class="name-form grid-block align-center shrink">
+      <label>
+        <input type="text" placeholder="Enter Name" ng-model="name">
+      </label>
+    </div>
 
 
-  <div id="order-content"  class="sqcontent">
-    <zf-notification-set id="main-notifications" position="top-left"></zf-notification-set>
-    <div class="grid-frame custom-block-grid">
-      <div class="grid-block small-1"></div>
-      <div ng-repeat="x in [0,1,2,3,4,5,6,7,8,9]">
-        <div ng-repeat="y in [0,1,2,3,4,5,6,7,8,9]">
-          <div id="{{x}}:{{y}}"
-                class="square"
-                ng-click="clickit(x,y)"
-                ng-class="{'sq-selected': squares[x][y].selected}"
-                >Eduardo Perez</div>
+
+    <div class="grid-block align-center shrink">
+      <div id="order-content"  class="sqcontent">
+        <zf-notification-set id="main-notifications" position="top-left"></zf-notification-set>
+        <div class="grid-frame squares-block-grid">
+          <!-- <div class="grid-block collapse"></div> -->
+          <div ng-repeat="x in [0,1,2,3,4,5,6,7,8,9]">
+            <div ng-repeat="y in [0,1,2,3,4,5,6,7,8,9]">
+              <div id="{{x}}:{{y}}"
+                    class="square"
+                    ng-click="clickit(x,y)"
+                    ng-class="{'sq-selected':  squares[x][y].selected}"
+                    >{{squares[x][y].name}}</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="grid-block small-1"></div>
     </div>
-  </div>
+
+    <div class="grid-block align-center shrink">
+      <a class="button" href="#" ng-click="purchase()">Purchase</a>
+    </div>
 
 
 
 
+  <!-- </div> -->
 </div>
 
