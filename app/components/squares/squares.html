@@ -44,8 +44,8 @@ controller: squaresCtrl
   background-color: green;
 }
 
-.sq-purchased {
-
+.sq-mine {
+  background-color: black;
 }
 
 .name-form {
@@ -58,7 +58,7 @@ controller: squaresCtrl
 
     <div class="name-form grid-block align-center shrink">
       <label>
-        <input type="text" placeholder="Enter Name" ng-model="name">
+        <input type="text" placeholder="Enter Name" ng-model="name" ng-keyup="repaint()">
       </label>
     </div>
 
@@ -71,20 +71,21 @@ controller: squaresCtrl
           <!-- <div class="grid-block collapse"></div> -->
           <div ng-repeat="x in [0,1,2,3,4,5,6,7,8,9]">
             <div ng-repeat="y in [0,1,2,3,4,5,6,7,8,9]">
-              <div id="{{x}}:{{y}}"
-                    class="square"
+              <div>
+                <div id="{{x}}:{{y}}"
                     ng-click="clickit(x,y)"
-                    ng-class="{'sq-selected':  squares[x][y].selected}"
+                    ng-class="squares[x][y].style"
                     >{{squares[x][y].name}}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="grid-block align-center shrink">
+    <!-- <div class="grid-block align-center shrink">
       <a class="button" href="#" ng-click="purchase()">Purchase</a>
-    </div>
+    </div> -->
 
 
 
