@@ -5,7 +5,7 @@ controller: squaresCtrl
 ---
 <style type="text/css">
 .square {
-  background-color: gray;
+  /*background-color: white;*/
   border-width: 0.2em;
   border-color: black;
   border-style: solid;
@@ -13,10 +13,8 @@ controller: squaresCtrl
   max-width: 5em;
   width: 5em;
   max-width: 5em;
-  padding: 0.1em;
-  color: white;
-  margin: auto;
-  display: inline-block;
+  /*padding: 0.1em;*/
+  background-color: #BFD3D3;
   text-align: center;
   /*width: 5em;
   height: 5em;
@@ -30,8 +28,8 @@ controller: squaresCtrl
 }
 .sqcontent {
   font-size: 0.3em;
-  width: 51em;
-  height: 51em;
+  width: 50em;
+  height: 50em;
   word-wrap: break-word;
   /*padding: 2em;*/
   margin: 3em;
@@ -41,15 +39,21 @@ controller: squaresCtrl
 }
 
 .sq-selected {
-  background-color: green;
+  background-color: #86aaaa;
 }
 
 .sq-mine {
-  background-color: black;
+  background-color: #225f5f;
+  color: white;
 }
 
-.name-form {
- /*width: 20em;*/
+.sqtext {
+ /*margin: auto;*/
+  /*display: inline-block;*/
+  /*text-align: center;*/
+  /*text-align: center;*/
+  /*line-height: 5em;*/
+  /*vertical-align: middle;*/
 }
 </style>
 
@@ -75,7 +79,11 @@ controller: squaresCtrl
                 <div id="{{x}}:{{y}}"
                     ng-click="clickit(x,y)"
                     ng-class="squares[x][y].style"
-                    >{{squares[x][y].name}}</div>
+                    >
+                  <span class="sqtext">
+                    {{squares[x][y].name}}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

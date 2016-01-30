@@ -38,6 +38,8 @@ squaresModule
 
       $scope.clickit = function(x,y) {
 
+        toastr.info("["+x+"]["+y+"]");
+
         // need a name, dummy
         if ($scope.name == '') {
           toastr.error("Name is required");
