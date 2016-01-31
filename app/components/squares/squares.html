@@ -3,97 +3,84 @@ name: home
 url: /
 controller: squaresCtrl
 ---
-<style type="text/css">
-.square {
-  /*background-color: white;*/
-  border-width: 0.2em;
-  border-color: black;
-  border-style: solid;
-  height: 5em;
-  max-width: 5em;
-  width: 5em;
-  max-width: 5em;
-  /*padding: 0.1em;*/
-  background-color: #BFD3D3;
-  text-align: center;
-  /*width: 5em;
-  height: 5em;
 
-  border-width: 0.2em;
-  max-width: 5em;
-  max-height: 5em;
-  min-width: 5em;
-  color: white;
-  border-style: solid;*/
-}
-.sqcontent {
-  font-size: 0.3em;
-  width: 50em;
-  height: 50em;
-  word-wrap: break-word;
-  /*padding: 2em;*/
-  margin: 3em;
-  /*float: none;*/
-  /*float: left;*/
-  /*overflow-x: scroll;*/
-}
 
-.sq-selected {
-  background-color: #86aaaa;
-}
-
-.sq-mine {
-  background-color: #225f5f;
-  color: white;
-}
-
-.sqtext {
- /*margin: auto;*/
-  /*display: inline-block;*/
-  /*text-align: center;*/
-  /*text-align: center;*/
-  /*line-height: 5em;*/
-  /*vertical-align: middle;*/
-}
-</style>
-
-<div class="grid-frame vertical" ng-controller="squaresCtrl">
-  <!-- <div class="grid-block " > -->
-
-    <div class="name-form grid-block align-center shrink">
+<div id="3-col-body" class="grid-block" ng-controller="squaresCtrl">
+  <!-- <div id="left-panel" class="grid-block">
+    This is the left panel content
+  </div> -->
+  <div id="middle-panel" class="grid-block vertical">
+    <div class="grid-block align-center shrink">
       <label>
         <input type="text" placeholder="Enter Name" ng-model="name" ng-keyup="repaint()">
       </label>
     </div>
 
+    <div ng-include src="'components/squares/_board.html'"></div>
+    <!-- <div class="grid-block sq-content squares-block-grid custom-container horizontal"> -->
 
 
-    <div class="grid-block align-center shrink">
+    <!-- <div class="grid-block align-center shrink">
       <div id="order-content"  class="sqcontent">
-        <zf-notification-set id="main-notifications" position="top-left"></zf-notification-set>
         <div class="grid-frame squares-block-grid">
-          <!-- <div class="grid-block collapse"></div> -->
-          <div ng-repeat="x in [0,1,2,3,4,5,6,7,8,9]">
-            <div ng-repeat="y in [0,1,2,3,4,5,6,7,8,9]">
-              <div>
-                <div id="{{x}}:{{y}}"
-                    ng-click="clickit(x,y)"
-                    ng-class="squares[x][y].style"
-                    >
-                  <span class="sqtext">
-                    {{squares[x][y].name}}
-                  </span>
-                </div>
+          <div ng-repeat="x in [0,1,2,3,4,5,6,7,8,9]" >
+            <div ng-repeat="y in [0,1,2,3,4,5,6,7,8,9]" >
+              <div id="{{x}}:{{y}}"
+                  ng-click="clickit(x,y)"
+                  ng-class="squares[x][y].style"
+                  >
+                <span class="sqtext">
+                  {{squares[x][y].name}}
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+ -->
 
-    <!-- <div class="grid-block align-center shrink">
-      <a class="button" href="#" ng-click="purchase()">Purchase</a>
+  </div>
+  <!-- <div id="right-panel" class="grid-block">
+    This is the right panel content
+  </div> -->
+
+
+
+     <!--  <div class="grid-block  sq-square" >
+        <div class="grid-content  center sq-square"></div>
+      </div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
+      <div class="grid-block sq-square" ></div>
     </div> -->
+
+
+
 
 
 

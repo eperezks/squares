@@ -6,16 +6,27 @@ squaresModule
       $scope.squares = [];
       $scope.name="";
 
-      for (var i=0; i<10; i++) {
+
+
+      $scope.isNumber = function(x,y) {
+        return ((x == 0) || (y == 0));
+      };
+
+      for (var i=0; i<11; i++) {
         // inner loop applies to sub-arrays
         $scope.squares.push([]);
-        for (var j=0; j<10; j++) {
+        for (var j=0; j<11; j++) {
           // accesses each element of each sub-array in turn
           // console.log( $scope.squares[i][j] );
-          $scope.squares[i].push({
-            selected: false,
-            style: "square"
-          });
+          if ($scope.isNumber(i,j)) {
+            $scope.squares[i].push({style: "square number"});
+          }
+          else {
+            $scope.squares[i].push({
+              selected: false,
+              style: "square"
+            });
+          }
         }
       }
 
@@ -28,9 +39,9 @@ squaresModule
       };
 
       $scope.repaint = function() {
-        toastr.info('repaint');
-        for (var x=0; x<10; x++) {
-          for (var y=0; y<10; y++) {
+        console.log('repaint');
+        for (var x=1; x<10; x++) {
+          for (var y=1; y<10; y++) {
             $scope.setstyle(x,y);
           }
         }
@@ -38,11 +49,11 @@ squaresModule
 
       $scope.clickit = function(x,y) {
 
-        toastr.info("["+x+"]["+y+"]");
+        console.log("["+x+"]["+y+"]");
 
         // need a name, dummy
         if ($scope.name == '') {
-          toastr.error("Name is required");
+          console.log("Name is required");
           return;
         }
 
@@ -53,7 +64,7 @@ squaresModule
             $scope.squares[x][y].name = undefined;
             $scope.squares[x][y].selected = false;
           } else {
-            toastr.info('You do not own this bitch');
+            toastrconsole.loginfo('You do not own this bitch');
           }
         }
         else {
@@ -80,17 +91,4 @@ squaresModule
         }
       };
 
-      $scope.purchase = function() {
-        for (var i=0; i<10; i++) {
-          for (var j=0; j<10; j++) {
-            if ($scope.squares[i][j].selected) {
-              // set the name
-              $scope.squares[i][j].name = $scope.name;
-
-              // de-select it
-              $scope.clickit(i,j);
-            }
-          };
-        };
-      };
     }]);

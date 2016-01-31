@@ -1,0 +1,116 @@
+<style type="text/css">
+.square {
+  /*background-color: white;*/
+
+  background-color: #BFD3D3;
+  border-width: 0.2em;
+  border-color: black;
+  border-style: solid;
+  height: 4em;
+  width: 4em;
+  /*font-size: 0.1em;*/
+  word-wrap: break-word;
+  display: block;
+
+  /*
+
+
+  height: 5em;
+  max-width: 5em;
+  width: 5em;
+  max-width: 5em;
+
+
+  text-align: center;
+  display: inline-block;*/
+
+  /*padding: 0.1em;*/
+  /*width: 5em;
+  height: 5em;
+
+  border-width: 0.2em;
+  max-width: 5em;
+  max-height: 5em;
+  min-width: 5em;
+  color: white;
+  border-style: solid;*/
+}
+
+.number {
+  background-color: red;
+}
+
+.sq-selected {
+  background-color: #86aaaa;
+}
+
+.sq-mine {
+  background-color: #225f5f;
+  color: white;
+}
+
+
+.board {
+  font-size: 7px;
+  /*width: 100em;*/
+  /*height: 50em;*/
+  word-wrap: break-word;
+  /*padding: 2em;*/
+  /*margin: 3em;*/
+  /*float: none;*/
+  /*float: left;*/
+  /*overflow-x: scroll;*/
+}
+
+.vertical-text {
+  /*width: 100%;
+  height: 100%;*/
+  /*font-size: 20px;*/
+  /*transform: rotate(109deg);*/
+  /*transform-origin: left center 0;*/
+  background-color: gray;
+}
+
+.vertical-team {
+  height: 44em;
+  width: 4em;
+  background-color: gray;
+}
+
+.team {
+  font-size: 7px;
+  background-color: gray;
+  height: 4em;
+  width: 44em;
+}
+.empty-block {
+  font-size: 7px;
+  height: 4em;
+  width: 4em;
+}
+</style>
+
+<div class="grid-block align-center shrink">
+  <div class="empty-block"></div>
+  <div class="team">afaslfkjlskj</div>
+</div>
+
+<div class="grid-block align-center board">
+  <div class="grid-block shrink">
+    <div class="vertical-team">
+      <div class="vertical-text "> Away </div>
+    </div>
+
+  </div>
+  <div ng-repeat="x in [0,1,2,3,4,5,6,7,8,9,10]" >
+    <div ng-repeat="y in [0,1,2,3,4,5,6,7,8,9,10]" >
+      <div id="{{x}}:{{y}}"
+          ng-click="isNumber(x,y) || clickit(x,y)"
+          ng-class="squares[x][y].style">
+        <span>
+          {{squares[x][y].name}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
