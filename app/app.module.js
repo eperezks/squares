@@ -6,7 +6,6 @@
   angular.module('application', [
     'ui.router',
     'ngAnimate',
-    'toastr',
 
     //foundation
     'foundation',

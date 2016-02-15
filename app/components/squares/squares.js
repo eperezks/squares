@@ -1,7 +1,7 @@
 squaresModule
 .controller('squaresCtrl',
-    ["$scope", "$state", "$http", '$log', 'toastr',
-    function($scope, $state, $http, $log, toastr){
+    ["$scope", "$state", "$http", '$log',
+    function($scope, $state, $http, $log){
       $scope.log = $log;
       $scope.squares = [];
       $scope.name="";
@@ -64,7 +64,7 @@ squaresModule
             $scope.squares[x][y].name = undefined;
             $scope.squares[x][y].selected = false;
           } else {
-            toastrconsole.loginfo('You do not own this bitch');
+            console.log('you dont own this bitch');
           }
         }
         else {

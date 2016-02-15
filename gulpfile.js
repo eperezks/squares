@@ -17,7 +17,8 @@ var ngConstant = require('gulp-ng-constant');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var protractor = require("gulp-protractor").protractor;
-
+var vulcanize = require('gulp-vulcanize');
+var crisper = require('gulp-crisper');
 // Check for --production flag
 var isProduction = !!(argv.production);
 
@@ -60,11 +61,11 @@ var paths = {
     '!bower_components/foundation-apps/js/angular/app.js',
 
     // needed for angular material
-    'bower_components/angular-aria/angular-aria.min.js',
-    'bower_components/angular-messages/angular-messages.min.js',
+    // 'bower_components/angular-aria/angular-aria.min.js',
+    // 'bower_components/angular-messages/angular-messages.min.js',
 
     // file upload
-    'bower_components/ng-file-upload/ng-file-upload.min.js',
+    // 'bower_components/ng-file-upload/ng-file-upload.min.js',
     'bower_components/angular-ui-router/release/angular-ui-router.min.js'
   ],
   // These files are for your app's JavaScript
@@ -72,7 +73,16 @@ var paths = {
     'app/app.module.js',
     'app/app.routes.js',
     'app/components/**/*.js'
-  ]
+  ],
+  // Files needed for polymer
+  polymer_libs: [
+    'bower_components/webcomponentsjs/webcomponents-lite.min.js',
+    'bower_components/web-animations-js/web-animations.min.js'
+
+  ],
+  polymer_files: [
+     'app/assets/polymer/**/*.html'
+   ]
 }
 
 // 3. TASKS
@@ -196,9 +206,27 @@ gulp.task('build', function(cb) {
     'lint',
     'copy',
     'copy:foundation',
+    'copy:polymer_libs',
+    'copy:polymer_files',
+    'vulcanize',
     'sass',
     'uglify'],
     'copy:templates', cb);
+});
+
+gulp.task('vulcanize', function () {
+  return gulp.src('vulcan.html')
+    .pipe(vulcanize({
+      abspath: '',
+      excludes: [],
+      stripExcludes: false,
+      inlineScripts: true
+    }))
+    .pipe(crisper({
+      scriptInHead: false, // true is default
+      onlySplit: false
+    }))
+    .pipe(gulp.dest('build/assets/polymer'));
 });
 
 gulp.task('e2e', function() {
@@ -208,6 +236,20 @@ gulp.task('e2e', function() {
         args: ['--baseUrl', get_config().APP_CONFIG.SPA_URL]
     }))
     .on('error', function(e) { throw e });
+});
+
+// Copies your app's polymer page templates
+gulp.task('copy:polymer_libs', function() {
+  return gulp.src(paths.polymer_libs)
+    .pipe(gulp.dest('./build/assets/polymer'));
+});
+
+gulp.task('copy:polymer_files', function() {
+  return gulp.src(paths.polymer_files, {
+    base: './app'
+  })
+    .pipe(gulp.dest('./build'))
+  ;
 });
 
 // Default task: builds your app, starts a server, and recompiles assets when they change
@@ -228,7 +270,13 @@ gulp.task('default', ['server'], function () {
               '!./app/assets/{scss,js}/**/*.*',
               '!./app/components/**/*.*'], ['copy']);
 
+  // Watch KM for polymer files
+  gulp.watch([paths.polymer_files], ['copy:polymer_files'])
+
   // Watch app templates
   gulp.watch(['./app/components/**/*.html'], ['copy:templates']);
 
+
+  // Watch for new polymer imports
+  gulp.watch(['./vulcan.html'], ['vulcanize']);
 });
