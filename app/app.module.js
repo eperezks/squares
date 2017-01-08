@@ -3,14 +3,10 @@
 
   var squaresModule = angular.module('application.squares', []);
 
-  angular.module('application', [
+  var application = angular.module('application', [
     'ui.router',
     'ngAnimate',
-
-    //foundation
     'foundation',
-    'foundation.dynamicRouting',
-    'foundation.dynamicRouting.animations',
     'application.squares'
   ])
     .config(config)

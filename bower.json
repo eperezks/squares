@@ -24,7 +24,6 @@
   ],
   "dependencies": {
     "foundation-apps": "~1.2.0",
-    "polymer": "Polymer/polymer#~1.2.4",
     "angular-ui-router": "~0.2.17"
   }
 }

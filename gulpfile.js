@@ -22,12 +22,44 @@ var crisper = require('gulp-crisper');
 var isProduction = !!(argv.production);
 
 // Lint Task
-gulp.task('lint', function() {
-    return gulp.src([,
-              'app/assets/js/**/*.js'
-            ])
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+// gulp.task('lint', function() {
+//     return gulp.src([,
+//               'app/assets/js/**/*.js'
+//             ])
+//         .pipe(jshint())
+//         .pipe(jshint.reporter('default'));
+// });
+
+var myConfig = require('./config/app.conf.json');
+var myEnv = undefined;
+
+var get_env = function() {
+  if (!(myEnv === undefined)) {
+    return myEnv;
+  }
+  if (process.env.BUGSY_ENV == undefined) {
+    myEnv = 'dev';
+  } else {
+    myEnv = process.env.BUGSY_ENV;
+  }
+  gutil.log("Using environment " + myEnv);
+  return myEnv;
+};
+
+var get_config = function() {
+  // Toggle environments
+  return myConfig[get_env()];
+};
+
+gulp.task('constants', function () {
+  var envConfig = get_config();
+
+  return ngConstant({
+      name: 'application.appConfig',
+      constants: envConfig,
+      stream: true
+    })
+    .pipe(gulp.dest('./build/assets/js'));
 });
 
 
@@ -71,7 +103,8 @@ var paths = {
   appJS: [
     'app/app.module.js',
     'app/app.routes.js',
-    'app/components/**/*.js'
+    'app/components/**/*.js',
+    'app/assets/**/*.js'
   ]
 }
 
@@ -193,6 +226,7 @@ gulp.task('server', ['build'], function() {
 // Builds your entire app once, without starting a server
 gulp.task('build', function(cb) {
   sequence('clean', [
+    'constants',
     // 'lint',
     'copy',
     'copy:foundation',
@@ -221,7 +255,9 @@ gulp.task('default', ['server'], function () {
               './app/assets/js/**/*',
               './js/**/*',
               'app/app.module.js',
-              'app/app.routes.js'], ['lint', 'uglify:app']);
+              'app/app.routes.js'], [
+              // 'lint',
+               'uglify:app']);
 
   // Watch static files
   gulp.watch(['./app/**/*.*',
